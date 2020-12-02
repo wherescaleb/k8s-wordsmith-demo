@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.web.name }}
+  labels:
+    app: {{ .Values.web.label.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.web.label.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.web.label.name }}
+    spec:
+      containers:
+        - name: {{ .Values.web.label.name }}
+          image: {{ .Values.web.image}}
+          ports:
+            - name: web
+              containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.api.name }}
+  labels:
+    app: {{ .Values.api.label.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.api.label.name }}
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.api.label.name }}
+    spec:
+      containers:
+        - name: {{ .Values.api.name }}
+          image: {{ .Values.api.image}}
+          ports:
+            - name: api
+              containerPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.db.name }}
+  labels:
+    app: {{ .Values.db.label.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.db.label.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.db.label.name }}
+    spec:
+      containers:
+        - name: {{ .Values.db.name }}
+          image: {{ .Values.db.image}}
+          ports:
+            - name: {{ .Values.db.name }}
+              containerPort: 5432
