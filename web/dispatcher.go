@@ -1,4 +1,3 @@
-sdada
 package main
 
 import (
