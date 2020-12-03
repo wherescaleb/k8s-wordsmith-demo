@@ -1,0 +1,17 @@
+web:
+  name: web
+  image: caleblwilliamson/k8s-wordsmith-web:master
+  label:
+    name: words-web
+
+api:
+  name: words
+  image: caleblwilliamson/k8s-wordsmith-api:master
+  label:
+    name: words-api
+
+db:
+  name: db
+  image: caleblwilliamson/k8s-wordsmith-db:master
+  label:
+    name: words-db
